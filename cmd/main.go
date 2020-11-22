@@ -23,5 +23,17 @@ func main() {
 		panic(err)
 	}
 
-	fmt.Println(w)
+	if len(w) == 0 {
+		fmt.Println("No workspaces found")
+		os.Exit(0)
+	}
+
+	first := w[0]
+
+	workspace, err := client.GetWorkspace(first.GID)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println(workspace)
 }

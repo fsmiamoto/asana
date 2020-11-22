@@ -7,7 +7,3 @@ type Workspace struct {
 	EmailDomains   *[]string `json:"email_domains"`
 	IsOrganization *bool     `json:"is_organization"`
 }
-
-type WorkspaceResponse struct {
-	Data []Workspace `json:"data"`
-}
