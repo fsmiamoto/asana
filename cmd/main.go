@@ -18,22 +18,32 @@ func main() {
 		asana.WithToken(token),
 	)
 
-	w, err := client.GetWorkspaces()
+	workspaces, err := client.GetWorkspaces()
 	if err != nil {
 		panic(err)
 	}
 
-	if len(w) == 0 {
+	if len(workspaces) == 0 {
 		fmt.Println("No workspaces found")
 		os.Exit(0)
 	}
 
-	first := w[0]
+	first := workspaces[1]
 
-	workspace, err := client.GetWorkspace(first.GID)
+	w, err := client.GetWorkspace(first.GID)
 	if err != nil {
 		panic(err)
 	}
 
-	fmt.Println(workspace)
+	projects, err := client.GetWorkspaceProjects(w.GID)
+	if err != nil {
+		panic(err)
+	}
+
+	tasks, err := client.GetTasksFromProject(projects[0].GID)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println(tasks)
 }
